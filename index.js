@@ -30,7 +30,9 @@ ArrayPromise.from = function (value) {
 }
 function arrayify(fn) {
   return function () {
-    return ArrayPromise.from(fn.apply(this, arguments))
+    var res = fn.apply(this, arguments)
+    if (typeof res === 'function') return arrayify(res)
+    else return ArrayPromise.from(res)
   }
 }
 ArrayPromise.denodeify = arrayify(Promise.denodeify)
@@ -77,27 +79,29 @@ ArrayPromise.prototype.filter = function (fn) {
 
 ArrayPromise.prototype.reduce = function (fn) {
   var length = arguments.length
+  var initial = arguments[1]
   return this.then(function (res) {
     function reducer(acc, val) {
-      return Promise.from(acc)
-        .then(function (acc) {
-          return fn(acc, val)
+      return Promise.all(acc, val)
+        .then(function (res) {
+          return fn(res[0], res[1])
         })
     }
-    if (length > 1) return Array.prototype.reduce.call(res, reducer, arguments[1])
+    if (length > 1) return Array.prototype.reduce.call(res, reducer, initial)
     else return Array.prototype.reduce.call(res, reducer)
   })
 }
-ArrayPromise.prototype.reduceRight = function (fn, initial) {
+ArrayPromise.prototype.reduceRight = function (fn) {
   var length = arguments.length
+  var initial = arguments[1]
   return this.then(function (res) {
     function reducer(acc, val) {
-      return Promise.from(acc)
-        .then(function (acc) {
-          return fn(acc, val)
+      return Promise.all(acc, val)
+        .then(function (res) {
+          return fn(res[0], res[1])
         })
     }
-    if (length > 1) return Array.prototype.reduceRight.call(res, reducer, arguments[1])
+    if (length > 1) return Array.prototype.reduceRight.call(res, reducer, initial)
     else return Array.prototype.reduceRight.call(res, reducer)
   })
 }
