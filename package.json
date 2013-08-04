@@ -1,0 +1,24 @@
+{
+  "name": "then-array",
+  "version": "0.0.0",
+  "description": "Extra methods for promises for arrays",
+  "keywords": [],
+  "dependencies": {
+    "promise": "~3.2.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai-as-promised": "~3.3.1",
+    "chai": "~1.7.2",
+    "mocha-as-promised": "~1.4.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ForbesLindesay/then-array.git"
+  },
+  "author": "ForbesLindesay",
+  "license": "MIT"
+}
