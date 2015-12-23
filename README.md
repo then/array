@@ -2,8 +2,8 @@
 
 Extra methods for promises for arrays
 
-[![Build Status](https://travis-ci.org/then/array.png?branch=master)](https://travis-ci.org/then/array)
-[![Dependency Status](https://gemnasium.com/then/array.png)](https://gemnasium.com/then/array)
+[![Build Status](https://img.shields.io/travis/then/array/master.svg)](https://travis-ci.org/then/array)
+[![Dependency Status](https://img.shields.io/david/then/array.svg)](https://david-dm.org/then/array)
 [![NPM version](https://badge.fury.io/js/then-array.png)](http://badge.fury.io/js/then-array)
 
 ## Installation
